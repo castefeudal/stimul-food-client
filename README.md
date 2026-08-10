@@ -1,43 +1,55 @@
-# STIMUL FOOD — клиентский сайт
+# STIMUL FOOD — client premium site
 
-Публичный клиентский сайт проекта STIMUL FOOD для Молодечно.
+Production-oriented static-first client experience for STIMUL FOOD.
 
-## Что находится в репозитории
+## Architecture
 
-- `index.html` — главная страница;
-- `menu.html` — интерактивное меню на 14 дней;
-- `privacy.html` — страница конфиденциальности;
-- `assets/menu.js` — логика интерактивного меню;
-- `assets/config.js` — публичная конфигурация сайта;
-- `build.py` — воспроизводимая сборка полной папки `dist`;
-- `.github/workflows/pages.yml` — автоматическая публикация GitHub Pages;
-- `dist/` — после первого успешного workflow сюда автоматически сохраняется полностью собранный сайт со всеми CSS, JS, изображениями и `data.json`.
+- `src/` — editable source.
+- `src/data/menu.public.json` — public nutrition/product dataset only.
+- `src/data/site.json` — pricing, offer semantics and product notes.
+- `src/assets/core.js` — navigation, forms, analytics abstraction.
+- `src/assets/home.js` — home metrics, package configurator, nutrition calculator.
+- `src/assets/menu.js` — menu explorer, filters, day/dish dialogs.
+- `dist/` — generated publication.
+- `build.py` — validates data and rebuilds `dist`.
 
-## Публичный адрес
+## Important security rule
 
-`https://castefeudal.github.io/stimul-food-client/`
+The client bundle must never contain ingredient procurement prices, day cost, wholesale assumptions or investor economics. `build.py` intentionally fails if forbidden cost fields appear in public JSON.
 
-## Как устроена сборка
-
-Общие статические файлы дизайна и меню берутся из зафиксированного коммита публичного репозитория `castefeudal/stimul-food-investor`. Версия закреплена в `build.py`, поэтому сборка воспроизводима и не зависит от дальнейших изменений investor-сайта.
-
-При каждом push в `main` GitHub Actions:
-
-1. запускает `python3 build.py`;
-2. собирает полный `dist/`;
-3. публикует `dist/` в GitHub Pages;
-4. синхронизирует собранный `dist/` обратно в репозиторий, чтобы готовый сайт можно было скачать целиком.
-
-## Локальный запуск
+## Run locally
 
 ```bash
-python3 build.py
+python build.py
 cd dist
-python3 -m http.server 8000
+python -m http.server 8000
 ```
 
-После этого откройте `http://localhost:8000`.
+Open `http://localhost:8000`.
 
-## Форма заявок
+## Change menu / pricing
 
-Cloudflare не используется. На GitHub Pages нет серверного backend: при пустом `formEndpoint` форма использует браузерный fallback. Для реального автоматического получения заявок позже достаточно указать внешний HTTPS endpoint в `assets/config.js`.
+- Menu: `src/data/menu.public.json`.
+- Pricing and trial-offer semantics: `src/data/site.json`.
+- Do not manually duplicate prices in HTML. UI reads them from data.
+
+## Lead form
+
+Set `formEndpoint` in `src/assets/config.js`. The included Cloudflare Pages function can receive requests at `/api/lead` when D1 is configured. Without a server endpoint the UI explicitly operates in demo mode and does not pretend that a request was delivered.
+
+## Production TODO
+
+- Add confirmed legal/business details to `privacy.html`.
+- Replace concept product imagery with verified production photography after control cooking.
+- Confirm delivery windows, storage regimes and shelf life before publishing them as facts.
+- Configure canonical production domain in `build.py` crawler files.
+
+## Internal source data
+
+`private-data/menu.internal.json` preserves the original full recipe/economic dataset, including procurement economics. It is outside `src/` and therefore never copied to the public `dist` build. Use it as the internal source when regenerating public product data.
+
+`private-data/` is listed in `.gitignore`. The public repository contains only the sanitized `src/data/` snapshot. `build.py` regenerates the public snapshot when local private data exists; in CI without private data it validates and builds the committed sanitized snapshot.
+
+## Brand assets
+
+`src/assets/mark.svg` is the selected plate + S-route + five-meal symbol. Alternate vector directions are kept in `src/assets/brand/` for comparison and future brand refinement.
