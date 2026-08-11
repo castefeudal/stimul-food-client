@@ -37,7 +37,7 @@ Open `http://localhost:8000`.
 
 Set `formEndpoint` in `src/assets/config.js`. The included Cloudflare Pages function can receive requests at `/api/lead` when D1 is configured. Without a server endpoint the UI explicitly operates in demo mode and does not pretend that a request was delivered.
 
-## Production TODO
+## Activation boundary
 
 - Add confirmed legal/business details to `privacy.html`.
 - Replace concept product imagery with verified production photography after control cooking.
