@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0b3b2f"/><circle cx="32" cy="32" r="22" fill="none" stroke="#f5efe3" stroke-width="4"/><path d="M19 25c5-8 22-7 25 1 2 7-7 8-14 9-8 1-13 3-11 9 2 7 17 8 24 1" fill="none" stroke="#f5efe3" stroke-width="4" stroke-linecap="round"/><g fill="#d7b56d"><circle cx="19" cy="17" r="2.4"/><circle cx="31" cy="10" r="2.4"/><circle cx="44" cy="16" r="2.4"/><circle cx="52" cy="29" r="2.4"/><circle cx="48" cy="44" r="2.4"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Малый знак STIMUL FOOD">
+  <circle cx="32" cy="32" r="30" fill="#102D28"/>
+  <path d="M30 12c-10 1-17 9-17 18 0 8 5 14 13 17 4 2 6 4 7 6 1-7-2-12-8-16-4-2-6-5-6-8 0-5 4-9 9-10 3-1 4-3 5-5 0-1-1-2-3-2Z" fill="#F06B52"/>
+  <path d="M34 52c10-1 17-9 17-18 0-8-5-14-13-17-4-2-6-4-7-6-1 7 2 12 8 16 4 2 6 5 6 8 0 5-4 9-9 10-3 1-4 3-5 5 0 1 1 2 3 2Z" fill="#F3B443"/>
+</svg>
